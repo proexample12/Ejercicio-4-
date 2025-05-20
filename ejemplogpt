@@ -1,0 +1,34 @@
+# Ejercicio 4: Monitoreo del consumo energético
+
+# Constantes
+EDIFICIOS = ["Aulas", "Biblioteca", "Administración", "Laboratorios"]
+TURNOS = ["Mañana", "Tarde", "Noche"]
+DIAS = 7
+
+# Variables
+consumo = [[[0 for _ in range(3)] for _ in range(DIAS)] for _ in range(len(EDIFICIOS))]
+
+# Captura de datos
+for i, edificio in enumerate(EDIFICIOS):
+    print(f"\n--- Registro para {edificio} ---")
+    for dia in range(DIAS):
+        print(f"\nDía {dia + 1}:")
+        for t, turno in enumerate(TURNOS):
+            valor = float(input(f"Ingrese consumo en {turno} (kWh): "))
+            consumo[i][dia][t] = valor
+
+# Cálculo y salida
+consumo_total = 0
+
+for i, edificio in enumerate(EDIFICIOS):
+    total_edificio = 0
+    for dia in range(DIAS):
+        for turno in range(3):
+            total_edificio += consumo[i][dia][turno]
+    promedio = total_edificio / DIAS
+    consumo_total += total_edificio
+    print(f"\n🔌 Edificio: {edificio}")
+    print(f"  Total semanal: {total_edificio:.2f} kWh")
+    print(f"  Promedio diario: {promedio:.2f} kWh")
+
+print(f"\n🌐 Consumo energético total de todos los edificios: {consumo_total:.2f} kWh")
